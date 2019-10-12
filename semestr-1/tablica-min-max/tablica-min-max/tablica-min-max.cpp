@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	vector <int> tablica;
+	vector <float> tablica;
 	float temp;
 
 	// Wprowadzenie pierwszej liczby (musi byc co najmniej jedna)
@@ -26,7 +26,7 @@ int main()
 
 	// Wyznaczenie min, max
 	float min = tablica[0], max = tablica[0];
-	for (int liczba : tablica)
+	for (float liczba : tablica)
 	{
 		if (min > liczba)
 			min = liczba;
@@ -36,7 +36,7 @@ int main()
 
 	// Wypisanie min,max
 	cout << "\nSposrod tablicy: [ ";
-	for (int liczba : tablica)
+	for (float liczba : tablica)
 		cout << liczba << ' ';
 	cout << "]\n";
 	cout << "Wartosc minimalna: " << min << "\nWartosc maksymalna: " << max << endl;
