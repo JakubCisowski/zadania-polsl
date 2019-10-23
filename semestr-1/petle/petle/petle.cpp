@@ -294,10 +294,10 @@ int main()
 	Zadanie2(5, 8);
 	Zadanie3(6);
 	Zadanie4(6);
-	Zadanie5(7); // dzia³a dla N nieparzystych
-	Zadanie6(10); // dzia³a dla N parzystych
+	Zadanie5(7); // dziala dla N nieparzystych
+	Zadanie6(10); // dziala dla N parzystych
 	Zadanie7(8);
-	Zadanie8(10); // dzia³a dla N parzystych
+	Zadanie8(10); // dziala dla N parzystych
 	Zadanie9(3);
 	Zadanie10(7, 7);
 	Zadanie11(11, 12);
