@@ -15,7 +15,8 @@ void Zadanie1(int W, int K)
 		cout << endl;
 	}
 	cout << endl;
-}
+}
+
 void Zadanie2(int W, int K)
 {
 	cout << "Zadanie 2 dla [W = " << W << ", K = " << K << "]: " << endl;
@@ -182,7 +183,7 @@ void Zadanie9(int N)
 {
 	cout << "Zadanie 9 dla [N = " << N << "]: " << endl;
 
-	for (int k = 0; k < N * N; k++) // wyœwietla wszystkie wiersze
+	for (int k = 0; k < N * N; k++) // wyÅ“wietla wszystkie wiersze
 	{
 		for (int i = 0; i < N; i++) // wyswietla pojedynczy wiersz
 		{
@@ -293,10 +294,10 @@ int main()
 	Zadanie2(5, 8);
 	Zadanie3(6);
 	Zadanie4(6);
-	Zadanie5(7); // dzia³a dla N nieparzystych
-	Zadanie6(10); // dzia³a dla N parzystych
+	Zadanie5(7); // dziaÂ³a dla N nieparzystych
+	Zadanie6(10); // dziaÂ³a dla N parzystych
 	Zadanie7(8);
-	Zadanie8(8); // dzia³a dla N parzystych
+	Zadanie8(10); // dziaÂ³a dla N parzystych
 	Zadanie9(3);
 	Zadanie10(7, 7);
 	Zadanie11(11, 12);
