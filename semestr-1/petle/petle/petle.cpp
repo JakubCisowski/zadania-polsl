@@ -31,6 +31,7 @@ void Zadanie2(int W, int K)
 	}
 	cout << endl;
 }
+
 void Zadanie3(int N)
 {
 	cout << "Zadanie 3 dla [N = " << N << "]: " << endl;
@@ -53,7 +54,7 @@ void Zadanie4(int N)
 	{
 		for (int j = 0; j < N; j++)
 		{
-			char znak = j > N - (i + 2) ? 'X' : '.';
+			char znak = j > N-(i + 2) ? 'X' : '.';
 			cout << znak;
 		}
 		cout << endl;
@@ -72,7 +73,7 @@ void Zadanie5(int N)
 			{
 				cout << ".";
 			}
-			for (int j = 0; j < N - 2 * i;j++)
+			for (int j = 0; j < N - 2 * i; j++)
 			{
 				cout << "X";
 			}
@@ -87,7 +88,7 @@ void Zadanie5(int N)
 			{
 				cout << ".";
 			}
-			for (int j = 0; j < 2 + 2 * i - N;j++)
+			for (int j = 0; j < 2 + 2 * i - N; j++)
 			{
 				cout << "X";
 			}
@@ -107,29 +108,43 @@ void Zadanie6(int N)
 	for (int i = 0; i < N; i++)
 	{
 		// .X.X
-		if (i < N / 2)
-		{
+		if(i<N/2){
 			for (int j = 0; j < i; j++)
+			{
 				cout << '.';
+			}
 			for (int j = 0; j < N / 2 - i; j++)
+			{
 				cout << 'X';
+			}
 			for (int j = 0; j < N / 2 - i - 1; j++)
+			{
 				cout << '.';
+			}
 			for (int j = 0; j < i + 1; j++)
+			{
 				cout << 'X';
+			}
 		}
 		else
 		{
 			for (int j = 0; j < N - i; j++)
+			{
 				cout << 'X';
+			}
 			for (int j = 0; j < i - N / 2; j++)
+			{
 				cout << '.';
+			}
 			for (int j = 0; j < i - N / 2 + 1; j++)
+			{
 				cout << 'X';
+			}
 			for (int j = 0; j < N - 1 - i; j++)
+			{
 				cout << '.';
+			}
 		}
-
 
 		cout << endl;
 	}
@@ -145,9 +160,13 @@ void Zadanie7(int N)
 		{
 			char znak;
 			if (i % 2 == 0)
+			{
 				znak = j % 2 == 0 ? 'X' : '.';
+			}
 			else
+			{
 				znak = j % 2 == 0 ? '.' : 'X';
+			}
 			cout << znak;
 		}
 		cout << endl;
@@ -160,19 +179,27 @@ void Zadanie8(int N)
 	cout << "Zadanie 8 dla [N = " << N << "]: " << endl;
 	for (int i = 0; i < N; i++)
 	{
-		if (i < N / 2)
+		if(i<N/2)
 		{
 			for (int j = 0; j < N / 2; j++)
+			{
 				cout << 'X';
+			}
 			for (int j = 0; j < N / 2; j++)
+			{
 				cout << '.';
+			}
 		}
 		else
 		{
 			for (int j = 0; j < N / 2; j++)
+			{
 				cout << '.';
+			}
 			for (int j = 0; j < N / 2; j++)
+			{
 				cout << 'X';
+			}
 		}
 		cout << endl;
 	}
@@ -182,7 +209,7 @@ void Zadanie8(int N)
 void Zadanie9(int N)
 {
 	cout << "Zadanie 9 dla [N = " << N << "]: " << endl;
-
+	
 	for (int k = 0; k < N * N; k++) // wyœwietla wszystkie wiersze
 	{
 		for (int i = 0; i < N; i++) // wyswietla pojedynczy wiersz
@@ -192,12 +219,16 @@ void Zadanie9(int N)
 				if (i % 2 == 0)
 				{
 					for (int j = 0; j < N; j++)
+					{
 						cout << 'X';
+					}
 				}
 				else
 				{
 					for (int j = 0; j < N; j++)
+					{
 						cout << '.';
+					}
 				}
 			}
 			else
@@ -205,24 +236,28 @@ void Zadanie9(int N)
 				if (i % 2 == 0)
 				{
 					for (int j = 0; j < N; j++)
+					{
 						cout << '.';
+					}
 				}
 				else
 				{
 					for (int j = 0; j < N; j++)
+					{
 						cout << 'X';
+					}
 				}
 			}
 		}
 		cout << endl;
 	}
-
-	cout << endl;
+	
+ 	cout << endl;
 }
 
 void Zadanie10(int W, int K)
 {
-	string poczatek = "";
+	string poczatek= "";
 	cout << "Zadanie 10 dla [W = " << W << ", K = " << K << "]: " << endl;
 	for (int i = 0; i < W; i++)
 	{
@@ -231,17 +266,20 @@ void Zadanie10(int W, int K)
 		if (i % 2 == 0)
 		{
 			for (int k = poczatek.size(); k < K; k++)
+			{
 				cout << 'X';
+			}
 		}
 		else
 		{
 			for (int k = poczatek.size(); k < K; k++)
+			{
 				cout << '.';
+			}
 		}
 
-
 		cout << endl;
-
+		
 		if (i % 2 == 0)
 		{
 			poczatek += "X.";
@@ -252,7 +290,7 @@ void Zadanie10(int W, int K)
 
 void Zadanie11(int W, int K)
 {
-	string poczatek = "";
+	string poczatek= "";
 	string koniec = "";
 	cout << "Zadanie 11 dla [W = " << W << ", K = " << K << "]: " << endl;
 	for (int i = 0; i < W; i++)
@@ -268,14 +306,18 @@ void Zadanie11(int W, int K)
 		if (i % 2 == 0)
 		{
 			for (int k = poczatek.size() + koniec.size(); k < K; k++)
+			{
 				cout << 'X';
+			}
 		}
 		else
 		{
 			for (int k = poczatek.size() + koniec.size(); k < K; k++)
+			{
 				cout << '.';
+			}
 		}
-
+		
 		cout << koniec << endl;
 
 		if (i <= W / 2 && i % 2 == 0)
@@ -297,7 +339,7 @@ int main()
 	Zadanie5(7); // dziala dla N nieparzystych
 	Zadanie6(10); // dziala dla N parzystych
 	Zadanie7(8);
-	Zadanie8(10); // dziala dla N parzystych
+	Zadanie8(8); // dziala dla N parzystych
 	Zadanie9(3);
 	Zadanie10(7, 7);
 	Zadanie11(11, 12);
