@@ -1,307 +1,323 @@
-﻿#include <iostream>
-#include <string>
+#include <iostream>
+#include <algorithm>
 using namespace std;
 
-void Zadanie1(int W, int K)
+const int W = 5, K = 4;
+
+void Wypisz(int tab[], const int N)
 {
-	cout << "Zadanie 1 dla [W = " << W << ", K = " << K << "]: " << endl;
-	for (int i = 0; i < W; i++)
+	for (int i=0;i<N;i++)
 	{
-		char znak = i % 2 == 0 ? 'X' : '.';
-		for (int j = 0; j < K; j++)
-		{
-			cout << znak;
-		}
-		cout << endl;
+		cout << tab[i] << " ";
 	}
 	cout << endl;
 }
 
-void Zadanie2(int W, int K)
+void Wypisz2d(int tab[W][K])
 {
-	cout << "Zadanie 2 dla [W = " << W << ", K = " << K << "]: " << endl;
-	for (int i = 0; i < W; i++)
+	for(int i=0; i<W; i++)
 	{
-		for (int j = 0; j < K; j++)
+		for(int j=0; j<K; j++)
 		{
-			char znak = j % 2 == 0 ? 'X' : '.';
-			cout << znak;
+			cout << tab[i][j] << ' ';
 		}
 		cout << endl;
 	}
-	cout << endl;
 }
 
-void Zadanie3(int N)
+void Zadanie1(int tab[], const int N)
 {
-	cout << "Zadanie 3 dla [N = " << N << "]: " << endl;
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			char znak = j < i ? '.' : 'X';
-			cout << znak;
-		}
-		cout << endl;
-	}
-	cout << endl;
-}
+	bool czyZamiana = true;
+	int i = 0;
 
-void Zadanie4(int N)
-{
-	cout << "Zadanie 4 dla [N = " << N << "]: " << endl;
-	for (int i = 0; i < N; i++)
+	while (czyZamiana)	
 	{
-		for (int j = 0; j < N; j++)
+		czyZamiana = false;
+		for (int j = 1; j < N - i; j++)
 		{
-			char znak = j > N - (i + 2) ? 'X' : '.';
-			cout << znak;
-		}
-		cout << endl;
-	}
-	cout << endl;
-}
-
-void Zadanie5(int N)
-{
-	cout << "Zadanie 5 dla [N = " << N << "]: " << endl;
-	for (int i = 0; i < N; i++)
-	{
-		if (i <= N / 2)
-		{
-			for (int j = 0; j < i; j++)
+			if (tab[j - 1] > tab[j])
 			{
-				cout << ".";
-			}
-			for (int j = 0; j < N - 2 * i;j++)
-			{
-				cout << "X";
-			}
-			for (int j = 0; j < i; j++)
-			{
-				cout << ".";
+				swap(tab[j - 1], tab[j]);
+				czyZamiana = true;
 			}
 		}
-		else
-		{
-			for (int j = 0; j < N - i - 1; j++)
-			{
-				cout << ".";
-			}
-			for (int j = 0; j < 2 + 2 * i - N;j++)
-			{
-				cout << "X";
-			}
-			for (int j = 0; j < N - i - 1; j++)
-			{
-				cout << ".";
-			}
-		}
-		cout << endl; 
+		i++;
 	}
-	cout << endl;
 }
 
-void Zadanie6(int N)
+void Zadanie2(int tab[], int tab2[], int tab3[], const int N, const int M)
 {
-	cout << "Zadanie 6 dla [N = " << N << "]: " << endl;
-	for (int i = 0; i < N; i++)
+	int i = 0, j = 0, k = 0;
+	while (i<N || j<M)
 	{
-		// .X.X
-		if (i < N / 2)
+		if (i != N && j != M)
 		{
-			for (int j = 0; j < i; j++)
-				cout << '.';
-			for (int j = 0; j < N / 2 - i; j++)
-				cout << 'X';
-			for (int j = 0; j < N / 2 - i - 1; j++)
-				cout << '.';
-			for (int j = 0; j < i + 1; j++)
-				cout << 'X';
-		}
-		else
-		{
-			for (int j = 0; j < N - i; j++)
-				cout << 'X';
-			for (int j = 0; j < i - N / 2; j++)
-				cout << '.';
-			for (int j = 0; j < i - N / 2 + 1; j++)
-				cout << 'X';
-			for (int j = 0; j < N - 1 - i; j++)
-				cout << '.';
-		}
-
-
-		cout << endl;
-	}
-	cout << endl;
-}
-
-void Zadanie7(int N)
-{
-	cout << "Zadanie 7 dla [N = " << N << "]: " << endl;
-	for (int i = 0; i < N; i++)
-	{
-		for (int j = 0; j < N; j++)
-		{
-			char znak;
-			if (i % 2 == 0)
-				znak = j % 2 == 0 ? 'X' : '.';
-			else
-				znak = j % 2 == 0 ? '.' : 'X';
-			cout << znak;
-		}
-		cout << endl;
-	}
-	cout << endl;
-}
-
-void Zadanie8(int N)
-{
-	cout << "Zadanie 8 dla [N = " << N << "]: " << endl;
-	for (int i = 0; i < N; i++)
-	{
-		if (i < N / 2)
-		{
-			for (int j = 0; j < N / 2; j++)
-				cout << 'X';
-			for (int j = 0; j < N / 2; j++)
-				cout << '.';
-		}
-		else
-		{
-			for (int j = 0; j < N / 2; j++)
-				cout << '.';
-			for (int j = 0; j < N / 2; j++)
-				cout << 'X';
-		}
-		cout << endl;
-	}
-	cout << endl;
-}
-
-void Zadanie9(int N)
-{
-	cout << "Zadanie 9 dla [N = " << N << "]: " << endl;
-
-	for (int k = 0; k < N * N; k++) // wyœwietla wszystkie wiersze
-	{
-		for (int i = 0; i < N; i++) // wyswietla pojedynczy wiersz
-		{
-			if (k / N % 2 == 0)
+			if (tab[i] < tab2[j])
 			{
-				if (i % 2 == 0)
-				{
-					for (int j = 0; j < N; j++)
-						cout << 'X';
-				}
-				else
-				{
-					for (int j = 0; j < N; j++)
-						cout << '.';
-				}
+				tab3[k++] = tab[i++];
 			}
 			else
 			{
-				if (i % 2 == 0)
-				{
-					for (int j = 0; j < N; j++)
-						cout << '.';
-				}
-				else
-				{
-					for (int j = 0; j < N; j++)
-						cout << 'X';
-				}
+				tab3[k++] = tab2[j++];
 			}
 		}
-		cout << endl;
+		else if (i == N)
+		{
+			tab3[k++] = tab2[j++];
+		}
+		else if (j == M)
+		{
+			tab3[k++] = tab[i++];
+		}
 	}
-
-	cout << endl;
 }
 
-void Zadanie10(int W, int K)
+void Zadanie3(int tab[], int tab2[], const int M)
 {
-	string poczatek = "";
-	cout << "Zadanie 10 dla [W = " << W << ", K = " << K << "]: " << endl;
-	for (int i = 0; i < W; i++)
+	for(int i=0; i<M; i++)
 	{
-		cout << poczatek;
-
-		if (i % 2 == 0)
+		for(int j=0; j<i;j++)
 		{
-			for (int k = poczatek.size(); k < K; k++)
-				cout << 'X';
+			if (tab[j] < tab[i])
+			{
+				tab2[i]++;
+			}
+		}
+	}
+}
+
+void Zadanie4(int tab[][K])
+{
+	int liczba = 1;
+	int i = 0, j = 0;
+	bool wDol = true;
+
+	while (j<K)
+	{
+		tab[i][j] = liczba++;
+
+		if (wDol)
+		{
+			i++;
 		}
 		else
 		{
-			for (int k = poczatek.size(); k < K; k++)
-				cout << '.';
+			i--;
 		}
 
-
-		cout << endl;
-
-		if (i % 2 == 0)
+		if (i == -1)
 		{
-			poczatek += "X.";
+			j++;
+			i++;
+			wDol = !wDol;
+		}
+		else if (i == W)
+		{
+			j++;
+			i--;
+			wDol = !wDol;
 		}
 	}
-	cout << endl;
 }
 
-void Zadanie11(int W, int K)
+void Zadanie5(int tab[][K])
 {
-	string poczatek = "";
-	string koniec = "";
-	cout << "Zadanie 11 dla [W = " << W << ", K = " << K << "]: " << endl;
-	for (int i = 0; i < W; i++)
+	int liczba = 1;
+	int i = 0, j = 0;
+	int id, jd;
+
+	while (liczba <= W * K)
 	{
-		if (i > W / 2 && i % 2 == 0)
+		tab[i][j] = liczba++;
+		id = i;
+		jd = j;
+		while(jd-1 >= 0 && id+1 < W)
 		{
-			poczatek = poczatek.substr(0, poczatek.size() - 2);
-			koniec = koniec.substr(0, koniec.size() - 2);
+			id++;
+			jd--;
+			tab[id][jd] = liczba++;
 		}
-
-		cout << poczatek;
-
-		if (i % 2 == 0)
+		if (j + 1 < K)
 		{
-			for (int k = poczatek.size() + koniec.size(); k < K; k++)
-				cout << 'X';
+			j++;
 		}
 		else
 		{
-			for (int k = poczatek.size() + koniec.size(); k < K; k++)
-				cout << '.';
-		}
-
-		cout << koniec << endl;
-
-		if (i <= W / 2 && i % 2 == 0)
-		{
-			poczatek += "X.";
-			koniec += ".X";
+			i++;
 		}
 
 	}
-	cout << endl;
 }
+
+void Zadanie6(int tab[][K])
+{
+	int liczba = 1;
+	int i = 0, j = 0;
+	int p=0, l=0, d=0, g=0; // ile wierszy/kolumn juz zapelnilismy
+	char sposobPrzechodzenia = 'P'; // prawo/lewo/dol/gora
+
+	while (liczba <= W*K)
+	{
+		tab[i][j] = liczba++;
+		if (j == K - 1 - d && sposobPrzechodzenia=='P')
+		{
+			sposobPrzechodzenia = 'D';
+			d++;
+		}
+		else if (i == W - 1 - l && sposobPrzechodzenia=='D')
+		{
+			sposobPrzechodzenia = 'L';
+			l++;
+		}
+		else if (j == g && sposobPrzechodzenia=='L')
+		{
+			sposobPrzechodzenia = 'G';
+			g++;
+		}
+		else if (i==p+1 && sposobPrzechodzenia=='G')
+		{
+			sposobPrzechodzenia = 'P';
+			p++;
+		}
+
+		switch(sposobPrzechodzenia)
+		{
+			case 'P':
+				j++;
+				break;
+			case 'L':
+				j--;
+				break;
+			case 'D':
+				i++;
+				break;
+			case 'G':
+				i--;
+				break;
+		}
+	}
+}
+
+void Zadanie7(int tab[][K])
+{
+	for(int i=0; i<W; i++) // iterowanie po wierszach
+	{
+		bool czyZamiana = true;
+		int k = 0;
+
+		while (czyZamiana)	
+		{
+			czyZamiana = false;
+			for (int j = 1; j < K - k; j++)
+			{
+				if (tab[i][j - 1] > tab[i][j])
+				{
+					swap(tab[i][j - 1], tab[i][j]);
+					czyZamiana = true;
+				}
+			}
+			k++;
+		}
+	}
+}
+
+// Zadanie 8 i 9 sa niewykonalne biorac pod uwage obecne umiejetnosci matematyczne
+
+void Zadanie10(int tab[][K])
+{
+	int maksymalneMin = tab[0][0];
+
+	for (int i = 0; i < W;i++)
+	{
+		int min = tab[i][0];
+		for (int j = 1; j < K;j++)
+		{
+			if (tab[i][j] < min)
+			{
+				min = tab[i][j];
+			}
+		}
+		cout << "Min dla wiersza " << i << "-tego: " << min << endl;
+		if (min > maksymalneMin)
+		{
+			maksymalneMin = min;
+		}
+	}
+
+	cout << "Maksymalne minimum: " << maksymalneMin <<  "." << endl;
+}
+
+// Zadaanie 11 jest analogiczne do pozostalych (rozni sie tylko struktura danych)
+
 
 int main()
 {
-	Zadanie1(5, 8);
-	Zadanie2(5, 8);
-	Zadanie3(6);
-	Zadanie4(6);
-	Zadanie5(7); // dziala dla N nieparzystych
-	Zadanie6(10); // dziala dla N parzystych
-	Zadanie7(8);
-	Zadanie8(8); // dziala dla N parzystych
-	Zadanie9(3);
-	Zadanie10(7, 7);
-	Zadanie11(11, 12);
+	const int N = 5, M = 6;
+	int tab[N] = {7,2,5,3,6};
+	int tab2[M] = {9,3,5,7,8,1};
+	int tab3[N + M];
+	int tab4[M] = { 0,8,4,3,9,4 };
+	int tab5[M] = {};
+	int tab6[W][K] = {};
+	int tab7[W][K] = { {7,5,3,2}, {0,12,1,3}, {5,5,5,3}, {2,5,7,8}, {9,6,4,1} };
+
+
+	cout << "Zadanie 1: " << endl;
+	cout << "Tablica nieposortowana" << endl;
+	Wypisz(tab, N);
+	Zadanie1(tab, N);
+	cout << "Tablica posortowana" << endl;
+	Wypisz(tab, N);
+
+	cout << endl;
+	cout << "Zadanie 2:" << endl;
+	cout << "Posortowana tablica nr 1:" << endl;
+	Wypisz(tab, N);
+	cout << "Posortowana tablica nr 2:" << endl;
+	Zadanie1(tab2,M);
+	Wypisz(tab2,M);
+	cout << "Scalone tablice nr 1 i 2:" << endl;
+	Zadanie2(tab, tab2, tab3, N, M);
+	Wypisz(tab3,N+M);
+	
+	cout << endl;
+	cout << "Zadanie 3:" << endl;
+	cout << "Tablica wejsciowa:" << endl;
+	Wypisz(tab4, M);
+	cout << "Tablica wyjsciowa:" << endl;
+	Zadanie3(tab4,tab5,M);
+	Wypisz(tab5,M);
+
+	cout << endl;
+	cout << "Zadanie 4:" << endl;
+	cout << "Tablica wyjsciowa:" << endl;
+	Zadanie4(tab6);
+	Wypisz2d(tab6);
+
+	cout << endl;
+	cout << "Zadanie 5:" << endl;
+	cout << "Tablica wyjsciowa:" << endl;
+	Zadanie5(tab6);
+	Wypisz2d(tab6);
+
+	cout << endl;
+	cout << "Zadanie 6:" << endl;
+	cout << "Tablica wyjsciowa:" << endl;
+	Zadanie6(tab6);
+	Wypisz2d(tab6);
+
+	cout << endl;
+	cout << "Zadanie 7:" << endl;
+	cout << "Tablica wyjsciowa:" << endl;
+	Zadanie7(tab7);
+	Wypisz2d(tab7);
+
+	cout << endl;
+	cout << "Zadanie 10:" << endl;
+	cout << "Tablica wyjsciowa:" << endl;
+	Wypisz2d(tab6);
+	Zadanie10(tab6);
+
 
 	return 0;
 }
