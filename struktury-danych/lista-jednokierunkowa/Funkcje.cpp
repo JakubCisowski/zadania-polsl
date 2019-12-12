@@ -37,37 +37,46 @@ void dodajNaKoniecRekurencyjnie(element*& pHead, typ liczba)
 }
 
 // Dodawanie elementu do listy posortowanej -------------------------------------
-// ! skip narazie
-/*
-void dodajIteracyjnieDoListyPosortowanej(element*& pHead, typ liczba)
-{
-	if (not pHead)
-	{
-		pHead = new element{ liczba, nullptr };
-	}
-	else
-	{
-		auto p = pHead;
-		element* poprzednik = nullptr;
-		while (p->pNext)
-		{
-			if (p->pNext->wartosc < liczba)
-			{
-				poprzednik = p;
-				p = p->pNext;
-			}
-		}
-		poprzednik = p;
-		p = p->pNext;
-		p = new element{ liczba, p->pNext };
-		poprzednik->pNext = p;
-	}
-}
+////
+////void dodajIteracyjnieDoListyPosortowanej(element*& pHead, typ liczba)
+////{
+////	if (not pHead)
+////	{
+////		pHead = new element{ liczba, nullptr };
+////	}
+////	else
+////	{
+////		bool nieNajwiekszy = false;
+////		auto p = pHead;
+////		while (p->pNext)
+////		{
+////			if (p->pNext->pNext->wartosc < liczba)
+////			{
+////				p = p->pNext;
+////			}
+////			else
+////			{
+////				nieNajwiekszy = true;
+////				break;
+////			}
+////		}
+////		if (nieNajwiekszy)
+////		{
+////			auto p2 = new element{ liczba, p->pNext->pNext };
+////			p->pNext->pNext = p2;
+////		}
+////		else
+////		{
+////			auto p2 = new element{ liczba, nullptr };
+////			p->pNext = p2;
+////		}
+////	}
+////}
+////
+////void dodajRekurencyjnieDoListyPosortowanej(element*& pHead, typ liczba)
+////{
+////}
 
-void dodajRekurencyjnieDoListyPosortowanej(element*& pHead, typ liczba)
-{
-}
-*/
 // Usuwanie listy ---------------------------------------------------------------
 
 void usunListeIteracyjnie(element*& pHead)
@@ -170,6 +179,60 @@ void usunOstatniIteracyjnie(element*& pHead)
 		}
 		delete p;
 		previous->pNext = nullptr;
+	}
+}
+
+void usunPowtorzenia(element*& pHead)
+{
+	if (pHead)
+	{
+		vector<typ> elementy;
+
+		auto p = pHead;
+		elementy.push_back(p->wartosc);
+		while (p->pNext)
+		{
+			bool czyWystapil = false;
+			// Sprawdzanie czy element o takiej wartosci juz wczesniej wystapil
+			// Jesli wystapil to usuwamy go z listy
+			for (typ wartosc : elementy)
+			{
+				if (wartosc == p->pNext->wartosc)
+				{
+					element* temp = p->pNext->pNext;
+					delete p->pNext;
+					p->pNext = temp;
+					czyWystapil = true;
+					break;
+				}
+			}
+			if (!czyWystapil)
+			{
+				elementy.push_back(p->pNext->wartosc);
+				p = p->pNext;
+			}
+		}
+	}
+}
+
+void usunParzyste(element*& pHead)
+{
+	if (pHead)
+	{
+		auto p = pHead;
+		while (p->pNext)
+		{
+			if (p->pNext->wartosc % 2 == 0)
+			{
+				element* temp = p->pNext->pNext;
+				delete p->pNext;
+				p->pNext = temp;
+			}
+			else
+			{
+				p = p->pNext;
+			}
+		}
 	}
 }
 

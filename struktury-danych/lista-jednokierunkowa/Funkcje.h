@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // Definicja elementu listy jednokierunkowej --------------------------------------------------
@@ -8,7 +9,7 @@ typedef int typ;
 
 struct element
 {
-	typ wartosc;       ///< wartosc przechowywana w li�cie
+	typ wartosc;       ///< wartosc przechowywana w liscie
 	element* pNext;   ///< wskaznik na nastepny element
 };
 
@@ -52,11 +53,11 @@ void usunOstatniIteracyjnie(element*& pHead);
 
 void odwrocListe(element*& pHead);
 
-// todo: ponizej
-
 void usunPowtorzenia(element*& pHead);
 
 void usunParzyste(element*& pHead);
+
+//! skip
 
 void dodajIteracyjnieDoListyPosortowanej(element*& pHead, typ liczba);
 
