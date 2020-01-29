@@ -37,45 +37,65 @@ void dodajNaKoniecRekurencyjnie(element*& pHead, typ liczba)
 }
 
 // Dodawanie elementu do listy posortowanej -------------------------------------
-////
-////void dodajIteracyjnieDoListyPosortowanej(element*& pHead, typ liczba)
-////{
-////	if (not pHead)
-////	{
-////		pHead = new element{ liczba, nullptr };
-////	}
-////	else
-////	{
-////		bool nieNajwiekszy = false;
-////		auto p = pHead;
-////		while (p->pNext)
-////		{
-////			if (p->pNext->pNext->wartosc < liczba)
-////			{
-////				p = p->pNext;
-////			}
-////			else
-////			{
-////				nieNajwiekszy = true;
-////				break;
-////			}
-////		}
-////		if (nieNajwiekszy)
-////		{
-////			auto p2 = new element{ liczba, p->pNext->pNext };
-////			p->pNext->pNext = p2;
-////		}
-////		else
-////		{
-////			auto p2 = new element{ liczba, nullptr };
-////			p->pNext = p2;
-////		}
-////	}
-////}
-////
-////void dodajRekurencyjnieDoListyPosortowanej(element*& pHead, typ liczba)
-////{
-////}
+
+void dodajIteracyjnieDoListyPosortowanej(element*& pHead, typ liczba) // niemalejaca
+{
+	if (pHead)
+	{
+		// sprawdzamy glowe
+		if (liczba < pHead->wartosc)
+		{
+			pHead = new element{ liczba, pHead };
+			return;
+		}
+
+		auto temp = pHead;
+
+		// sprawdzamy nastepne wartosci
+		while (temp->pNext)
+		{
+			if (liczba < temp->pNext->wartosc)
+			{
+				auto temp2 = temp->pNext;
+				temp->pNext = new element{ liczba, temp2 };
+				return;
+			}
+			temp = temp->pNext;
+		}
+
+		// dodajemy na koniec jesli nigdzie wczesniej nie dodawalismy
+		temp->pNext = new element{ liczba, nullptr };
+	}
+}
+
+void dodajRekurencyjnieDoListyPosortowanej(element*& pHead, typ liczba) // niemalejaca
+{
+	if (pHead->wartosc > liczba)
+	{
+		// Dodajemy na poczatek
+		pHead = new element{ liczba, pHead };
+		return;
+	}
+
+	if (pHead->pNext)
+	{
+		if (pHead->pNext->wartosc > liczba)
+		{
+			pHead->pNext = new element{ liczba, pHead->pNext };
+			return;
+		}
+		else
+		{
+			dodajRekurencyjnieDoListyPosortowanej(pHead->pNext, liczba);
+		}
+	}
+	else
+	{
+		// Dodajemy na koniec
+		pHead->pNext = new element{ liczba, nullptr };
+		return;
+	}
+}
 
 // Usuwanie listy ---------------------------------------------------------------
 
@@ -179,6 +199,28 @@ void usunOstatniIteracyjnie(element*& pHead)
 		}
 		delete p;
 		previous->pNext = nullptr;
+	}
+}
+
+void usunOstatniRekurencyjnie(element*& pHead)
+{
+	if (pHead->pNext)
+	{
+		if (pHead->pNext->pNext)
+		{
+			usunOstatniRekurencyjnie(pHead->pNext);
+		}
+		else
+		{
+			delete pHead->pNext;
+			pHead->pNext = nullptr;
+		}
+	}
+	else
+	{
+		// istnieje jeden element
+		delete pHead;
+		pHead = nullptr;
 	}
 }
 
@@ -352,4 +394,78 @@ void odwrocListe(element*& pHead)
 
 	pHead = p;
 	pHead->pNext = poprzednik;
+}
+
+// Scalanie listy ----------------------------------------------------------------------
+
+element* scalListyPosortowane(element*& pH1, element*& pH2) // niemalejaco
+{
+	element* pHead = nullptr;
+
+	// glowa
+	if (pH1 && pH2)
+	{
+		if (pH1->wartosc < pH2->wartosc)
+		{
+			pHead = new element{ pH1->wartosc, nullptr };
+			pH1 = pH1->pNext;
+		}
+		else
+		{
+			pHead = new element{ pH2->wartosc, nullptr };
+			pH2 = pH2->pNext;
+		}
+	}
+	else
+	{
+		if (pH1)
+		{
+			pHead = new element{ pH1->wartosc, nullptr };
+			pH1 = pH1->pNext;
+		}
+		else
+		{
+			pHead = new element{ pH2->wartosc, nullptr };
+			pH2 = pH2->pNext;
+		}
+	}
+
+	auto temp = pHead;
+
+	// iterujemy po reszcie
+	while (pH1 || pH2)
+	{
+		if (pH1 && pH2)
+		{
+			if (pH1->wartosc < pH2->wartosc)
+			{
+				temp->pNext = new element{ pH1->wartosc, nullptr };
+				temp = temp->pNext;
+				pH1 = pH1->pNext;
+			}
+			else
+			{
+				temp->pNext = new element{ pH2->wartosc, nullptr };
+				temp = temp->pNext;
+				pH2 = pH2->pNext;
+			}
+		}
+		else
+		{
+			if (pH1)
+			{
+				temp->pNext = new element{ pH1->wartosc, nullptr };
+				temp = temp->pNext;
+				pH1 = pH1->pNext;
+			}
+			else
+			{
+				temp->pNext = new element{ pH2->wartosc, nullptr };
+				temp = temp->pNext;
+				pH2 = pH2->pNext;
+			}
+		}
+	}
+
+	return pHead;
 }
